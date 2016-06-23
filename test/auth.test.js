@@ -14,7 +14,7 @@ describe('Auth Controller', function() {
       request(app).post('/auth/signup')
       .type('form')
       .send({
-        email: 'new@new.com',
+        email: 'new@new.co',
         name: 'Brian',
         password: 'password'
       })
