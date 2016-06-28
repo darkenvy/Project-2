@@ -17,6 +17,9 @@ module.exports = {
       location: {
         type: Sequelize.STRING
       },
+      description: {
+        type: Sequelize.STRING
+      },
       venuename: {
         type: Sequelize.STRING
       },

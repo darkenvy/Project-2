@@ -18,6 +18,35 @@ router.get('/new', function(req, res) {
   res.render('event/create');
 });
 
+// Route to POST new event
+router.post('/create', function(req, res) {
+  db.event.findOrCreate({
+    where: {
+      name: req.body.eventName,
+      date: req.body.eventDate,
+      location: req.body.eventLocation
+    },
+    defaults: {
+      venuename: req.body.venueName,
+      description: req.body.eventDescription,
+      venueaddress: req.body.venueAddress,
+      venueurl: req.body.venueUrl
+    }
+  })
+  // .spread(function(event, created) {
+  //   // Some code? Iunno, wtf....
+  //   req.flash('success', 'Event successfully created');
+  // })
+  .spread(function(event) {
+    console.log('********** ' + event.dataValues.id + ' ***********');
+    req.flash('success', 'Event successfully created!');
+    res.redirect('/event/' + event.dataValues.id);
+  })
+  .catch(function(err) {
+    res.status(404).render('error');
+  });
+});
+
 // Route for specific event page
 router.get('/:id', function(req, res) {
   db.event.findById(req.params.id).then(function(event) {

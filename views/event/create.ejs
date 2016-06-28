@@ -1,1 +1,34 @@
 <h1>Create a new event</h1>
+
+<form action="/event/create" method="POST">
+  <div class="form-group">
+    <label for="eventName">Name of Event</label>
+    <input type="text" class="form-control" id="eventName" name="eventName" required>
+  </div>
+  <div class="form-group">
+    <label for="eventDate">Date of Event</label>
+    <input type="text" class="form-control" id="eventDate" name="eventDate" required>
+  </div>
+  <div class="form-group">
+    <label for="eventLocation">Location of Event</label>
+    <input type="text" class="form-control" id="eventLocation" name="eventLocation" required>
+  </div>
+  <div class="form-group">
+    <label for="eventDescription">Description of Event</label>
+    <input type="text" class="form-control" id="eventDescription" name="eventDescription" required>
+  </div>
+  <div class="form-group">
+    <label for="venueName">Name of Venue</label>
+    <input type="text" class="form-control" id="venueName" name="venueName" required>
+  </div>
+  <div class="form-group">
+    <label for="venueAddress">Address of Venue</label>
+    <input type="text" class="form-control" id="venueAddress" name="venueAddress" required>
+  </div>
+  <div class="form-group">
+    <label for="venueUrl">URL of Venue</label>
+    <input type="text" class="form-control" id="venueUrl" name="venueUrl">
+  </div>
+
+  <input type="submit" class="btn btn-primary">
+</form>
