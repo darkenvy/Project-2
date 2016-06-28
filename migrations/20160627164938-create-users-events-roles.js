@@ -1,17 +1,20 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('attendingEvents', {
+    return queryInterface.createTable('usersEventsRoles', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
+      usersId: {
         type: Sequelize.INTEGER
       },
-      eventId: {
+      eventsId: {
+        type: Sequelize.INTEGER
+      },
+      rolesId: {
         type: Sequelize.INTEGER
       },
       createdAt: {
@@ -25,6 +28,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('attendingEvents');
+    return queryInterface.dropTable('usersEventsRoles');
   }
 };

@@ -4,12 +4,15 @@ module.exports = function(sequelize, DataTypes) {
     name: DataTypes.STRING,
     date: DataTypes.DATEONLY,
     location: DataTypes.STRING,
-    venueName: DataTypes.STRING,
-    venueAddress: DataTypes.VARCHAR
+    venuename: DataTypes.STRING,
+    venueaddress: DataTypes.STRING,
+    venueurl: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
+        models.event.belongsToMany(models.user, { through: "usersEventsRole" }),
+        models.event.belongsToMany(models.role, { through: "usersEventsRole" })
       }
     }
   });

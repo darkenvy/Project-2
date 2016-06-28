@@ -1,27 +1,42 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('events', {
+    return queryInterface.createTable('users', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      email: {
+        type: Sequelize.STRING
+      },
       name: {
         type: Sequelize.STRING
       },
-      date: {
-        type: Sequelize.DATEONLY
-      },
-      location: {
+      password: {
         type: Sequelize.STRING
       },
-      venueName: {
+      linkedinlink: {
         type: Sequelize.STRING
       },
-      venueAddress: {
-        type: Sequelize.VARCHAR
+      githublink: {
+        type: Sequelize.STRING
+      },
+      dribblelink: {
+        type: Sequelize.STRING
+      },
+      personalurl: {
+        type: Sequelize.STRING
+      },
+      companyname: {
+        type: Sequelize.STRING
+      },
+      companyurl: {
+        type: Sequelize.STRING
+      },
+      bio: {
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
@@ -34,6 +49,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('events');
+    return queryInterface.dropTable('users');
   }
 };

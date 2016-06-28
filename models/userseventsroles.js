@@ -1,9 +1,9 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var organizer = sequelize.define('organizer', {
-    userId: DataTypes.INTEGER,
-    eventId: DataTypes.INTEGER,
-    bio: DataTypes.TEXT
+  var usersEventsRoles = sequelize.define('usersEventsRoles', {
+    usersId: DataTypes.INTEGER,
+    eventsId: DataTypes.INTEGER,
+    rolesId: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
@@ -11,5 +11,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return organizer;
+  return usersEventsRoles;
 };
