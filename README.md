@@ -1,6 +1,6 @@
-# Project_2
+# HackyTrack
 
-Express authentication template using Passport + flash messages + custom middleware
+Tool for hackathons: project management tools for organizers, and communication hub (utilizing Slack) for organizers and attendees.
 
 ## Getting Started
 
