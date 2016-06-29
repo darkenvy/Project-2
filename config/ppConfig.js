@@ -28,4 +28,17 @@ passport.use(new LocalStrategy({
   }).catch(cb);
 }));
 
+// Working on getting passport-slack to work below
+
+// passport.use(new SlackStrategy({
+//     clientID: CLIENT_ID,
+//     clientSecret: CLIENT_SECRET
+//   },
+//   function(accessToken, refreshToken, profile, done) {
+//     User.findOrCreate({ SlackId: profile.id }, function(err, user) {
+//       return done(err, user);
+//     });
+//   }
+// ));
+
 module.exports = passport;

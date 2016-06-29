@@ -25,6 +25,7 @@ app.use(function(req, res, next) {
   res.locals.currentUser = req.user;
   next();
 });
+app.use(express.static(__dirname + '/public/'));
 
 app.get('/', function(req, res) {
   res.render('index');

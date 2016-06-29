@@ -3,9 +3,27 @@ var db = require('../models');
 var passport = require('../config/ppConfig');
 var router = express.Router();
 
-// Route to show search page, list upcoming events
+// Route to show page to search through events
 router.get('/search', function(req, res) {
   res.render('event/search');
+});
+
+// Route to display upcoming events
+router.get('/upcoming', function(req, res) {
+  var date = new Date();
+  db.event.findAll({
+    where: {
+      date: {
+        $gt: new Date()
+      }
+    }
+  })
+  .then(function(event) {
+    res.render('event/upcoming', { events: event })
+  })
+  .catch(function(err) {
+    res.status(500).render('error');
+  });
 });
 
 // Route to display specific search results
