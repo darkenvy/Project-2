@@ -3,3 +3,5 @@
 <h4><%= event.date %></h4>
 <h4><%= event.location %></h4>
 <h4><%= event.venuename %></h4>
+<a href="#">Questions? Reach out to the event organizers on Slack here</a>
+<button onclick="window.location='/event/<%= event.id %>/register';" type="button" class="btn btn-success" id="regBtnEvent<%= event.id %>" name="regBtnEvent<%= event.id %>">Register for this event</button>

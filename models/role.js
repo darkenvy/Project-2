@@ -6,8 +6,8 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        models.role.belongsToMany(models.user, { through: "usersEventsRoles" }),
-        models.role.belongsToMany(models.event, { through: "usersEventsRoles" })
+        models.role.belongsToMany(models.user, { through: "usersEventsRoles", foreignKey: 'usersId' }),
+        models.role.belongsToMany(models.event, { through: "usersEventsRoles", foreignKey: 'eventsId' })
       }
     }
   });

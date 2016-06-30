@@ -1,6 +1,8 @@
 var express = require('express');
 var db = require('../models');
 var passport = require('../config/ppConfig');
+var isOrganizer = require('../middleware/isOrganizer');
+var isRegistered = require('../middleware/isRegistered');
 var router = express.Router();
 
 // Route to show page to search through events
@@ -38,6 +40,7 @@ router.get('/new', function(req, res) {
 
 // Route to POST new event
 router.post('/create', function(req, res) {
+  console.log(req.user.id);
   db.event.findOrCreate({
     where: {
       name: req.body.eventName,
@@ -51,14 +54,15 @@ router.post('/create', function(req, res) {
       venueurl: req.body.venueUrl
     }
   })
-  // .spread(function(event, created) {
-  //   // Some code? Iunno, wtf....
-  //   req.flash('success', 'Event successfully created');
-  // })
   .spread(function(event) {
-    console.log('********** ' + event.dataValues.id + ' ***********');
-    req.flash('success', 'Event successfully created!');
-    res.redirect('/event/' + event.dataValues.id);
+    db.usersEventsRoles.create({
+      eventsId: event.id,
+      rolesId: 1,
+      usersId: req.user.id
+    }).then(function() {
+      req.flash('success', 'Event successfully created!');
+      res.redirect('/event/' + event.id + '/planning');
+    });
   })
   .catch(function(err) {
     res.status(404).render('error');
@@ -78,7 +82,7 @@ router.get('/:id', function(req, res) {
   });
 });
 
-// Route for registering for a specific event
+// Route for displaying register page for a specific event
 router.get('/:id/register', function(req, res) {
   db.event.findById(req.params.id).then(function(event) {
     if (event) {
@@ -91,9 +95,29 @@ router.get('/:id/register', function(req, res) {
   });
 });
 
+// Route for registering for event
+router.post('/:id/register', function(req, res) {
+  db.event.findOne({
+    where: { id: req.params.id },
+    // include: [db.user, db.role]
+  }).then(function(event) {
+    // event.addUser(req.user.id, {
+    //   rolesId: parseInt(req.body.roleSelect)
+    // }).then(function() {
+    //   res.redirect('/event/' + event.id + '/home');
+    // });
+    db.usersEventsRoles.create({
+      eventsId: event.id,
+      rolesId: parseInt(req.body.roleSelect),
+      usersId: req.user.id
+    }).then(function() {
+      res.redirect('/event/' + event.id + '/home');
+    });
+  });
+});
+
 // Route to specific event homepage for registered (authorized) users
-// MAY NEED TO STILL ADD CODE TO VALIDATE AUTHORIZATION
-router.get('/:id/home', function(req, res) {
+router.get('/:id/home', isRegistered, function(req, res) {
   db.event.findById(req.params.id).then(function(event) {
     if (event) {
       res.render('event/home', { event: event });
@@ -106,7 +130,7 @@ router.get('/:id/home', function(req, res) {
 });
 
 // Route for organizers to plan/edit their page
-router.get('/:id/planning', function(req, res) {
+router.get('/:id/planning', isOrganizer, function(req, res) {
   db.event.findById(req.params.id).then(function(event) {
     if (event) {
       res.render('event/planning', { event: event });

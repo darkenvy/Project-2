@@ -36,13 +36,15 @@ module.exports = function(sequelize, DataTypes) {
     personalurl: DataTypes.STRING,
     companyname: DataTypes.STRING,
     companyurl: DataTypes.STRING,
+    slackId: DataTypes.STRING,
+    slackToken: DataTypes.STRING,
     bio: DataTypes.TEXT
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        models.user.belongsToMany(models.event, { through: "usersEventsRoles" }),
-        models.user.belongsToMany(models.role, { through: "usersEventsRoles" })
+        models.user.belongsToMany(models.event, { through: "usersEventsRoles", foreignKey: 'eventsId' }),
+        models.user.belongsToMany(models.role, { through: "usersEventsRoles", foreignKey: 'rolesId' })
       }
     },
     instanceMethods: {
