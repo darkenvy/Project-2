@@ -1,0 +1,101 @@
+.navbarLink {
+  color: #409F2B !important;
+}
+
+h1 {
+  font-size: 35pt;
+  color: white;
+  text-align: center;
+}
+
+h2 {
+  font-size: 25pt;
+  color: white;
+  text-align: center;
+}
+
+h3 {
+  color: white;
+  text-align: center;
+}
+
+h4 {
+  color: white;
+}
+
+.stupidH4 {
+  color: white;
+  text-align: center;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+p {
+  color: white;
+}
+
+div > p {
+  color: white;
+  text-align: center;
+}
+
+.well > h2,p,a,h4 {
+  text-align: left;
+  color: #08220D;
+}
+
+label {
+  color: white;
+}
+
+body {
+  background-image: url('/img/HTbgPensPaperPostIts.jpeg');
+  /*background-color: black;*/
+  background-size: cover;
+  background-repeat: none;
+  position: relative;
+}
+
+.transparent {
+  padding-top: 30px;
+  background: rgba(255,255,255,0.5);
+  position: absolute;
+  border-radius: 5px;
+  /*margin: center;*/
+  margin: 0 30px 0 -15px;
+  padding: 20px 20px 20px 20px;
+}
+
+.transparentMain {
+  background: rgba(255,255,255,0.5);
+  position: relative;
+  border-radius: 5px;
+  align-items: center;
+  width: 40%;
+  margin: auto;
+  margin-top: 20%;
+  text-align: center;
+  padding: 20px 20px 20px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.wikiWindow {
+  background: rgba(255,255,255,0.5);
+  position: relative;
+}
+
+.transparentParent {
+  margin-left: -20px;
+}
+
+.well a {
+  padding-top: 10px;
+}
+
+/*.wikiWindow {
+  font-color: white !important;
+}*/

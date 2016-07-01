@@ -1,8 +1,10 @@
 var express = require('express');
 var db = require('../models');
 var passport = require('../config/ppConfig');
+var isLoggedIn = require('../middleware/isLoggedIn');
 var isOrganizer = require('../middleware/isOrganizer');
 var isRegistered = require('../middleware/isRegistered');
+var marked = require('marked');
 var router = express.Router();
 
 // Route to show page to search through events
@@ -39,7 +41,7 @@ router.get('/new', function(req, res) {
 });
 
 // Route to POST new event
-router.post('/create', function(req, res) {
+router.post('/create', isLoggedIn, function(req, res) {
   console.log(req.user.id);
   db.event.findOrCreate({
     where: {
@@ -83,7 +85,7 @@ router.get('/:id', function(req, res) {
 });
 
 // Route for displaying register page for a specific event
-router.get('/:id/register', function(req, res) {
+router.get('/:id/register', isLoggedIn, function(req, res) {
   db.event.findById(req.params.id).then(function(event) {
     if (event) {
       res.render('event/register', { event: event });
@@ -96,7 +98,7 @@ router.get('/:id/register', function(req, res) {
 });
 
 // Route for registering for event
-router.post('/:id/register', function(req, res) {
+router.post('/:id/register', isLoggedIn, function(req, res) {
   db.event.findOne({
     where: { id: req.params.id },
     // include: [db.user, db.role]
@@ -139,6 +141,27 @@ router.get('/:id/planning', isOrganizer, function(req, res) {
     }
   }).catch(function(err) {
     res.status(500).render('error');
+  });
+});
+
+// Route for organizers to edit their event's Wiki
+router.post('/:id/planning', isOrganizer, function(req, res) {
+  console.log('wikiContent: ', req.body.wikiContent);
+  console.log('wikiPublished: ', req.body.publish);
+  if (!req.body.publish) {
+    var publish = false;
+  } else {
+    var publish = true;
+  }
+  db.event.update({
+    wikiContent: req.body.wikiContent,
+    wikiPublished: publish
+  }, {
+    where: {
+      id: req.params.id
+    }
+  }).then(function(event) {
+    res.redirect('/event/' + req.params.id + '/home');
   });
 });
 

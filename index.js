@@ -7,6 +7,7 @@ var flash = require('connect-flash');
 var isLoggedIn = require('./middleware/isLoggedIn');
 var isOrganizer = require('./middleware/isOrganizer');
 var isRegistered = require('./middleware/isRegistered');
+var marked = require('marked');
 var app = express();
 
 app.set('view engine', 'ejs');

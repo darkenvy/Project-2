@@ -1,10 +1,10 @@
 <h1>Upcoming Events</h1>
-<!-- <h4>sorted by date</h4> -->
+<h3>Find an event, register, and GO! :-)</h3>
 
 <% events.forEach(function(event) { %>
   <div class="well">
     <h2><a href="/event/<%= event.id %>"><%= event.name %></a></h2>
-    <h4>on <%= event.date %> in <%= event.location %> at <%= event.venuename %></h4>
+    <p>on <%= event.date %> in <%= event.location %> at <%= event.venuename %></p>
   </div>
 
 <% }); %>

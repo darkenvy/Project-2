@@ -7,7 +7,9 @@ module.exports = function(sequelize, DataTypes) {
     description: DataTypes.STRING,
     venuename: DataTypes.STRING,
     venueaddress: DataTypes.STRING,
-    venueurl: DataTypes.STRING
+    venueurl: DataTypes.STRING,
+    wikiContent: DataTypes.TEXT,
+    wikiPublished: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {

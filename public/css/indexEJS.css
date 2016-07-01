@@ -1,0 +1,22 @@
+body {
+  background-image: url('/img/HTbgPensPaperPostIts.jpeg');
+  background-size: cover;
+  background-repeat: none;
+}
+
+h1 {
+  font-size: 40pt;
+  padding-top: 10%;
+  text-align: center;
+  color: black;
+}
+
+h3 {
+  font-size: 20pt;
+  text-align: center;
+  color: black;
+}
+
+.indexEJS {
+  color: black;
+}

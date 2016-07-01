@@ -1,1 +1,19 @@
 <h1><%= event.name %> Home Page</h1>
+<h3><%= event.date %> at <%= event.venueName %> in <%= event.location %></h3>
+
+<hr/>
+
+<div>
+  <h2><%= event.name %> Wiki</h2>
+  <hr/>
+  <div>
+    <div id="wikiWindow"><%= event.wikiContent %>
+    </div>
+  </div>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('wikiWindow').innerHTML = marked('<%= event.wikiContent.replace(/\\n/g, '<br />').trim() %>');
+  });
+  </script>
+</div>
+

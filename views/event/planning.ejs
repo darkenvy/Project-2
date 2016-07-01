@@ -1,11 +1,36 @@
 <div class="container">
   <h1><%= event.name %> Planning Page</h1>
-  <div class="toDoListBox" id="toDoListBox">
-    <div class="toDoList" id="toDoList">
+  <hr/>
+  <div class="row">
+    <div class="toDoListBox col-lg-5" id="toDoListBox">
+      <h3>To-Do List</h3>
+      <p>Items can easily be deleted with one click</p>
+      <hr/>
+      <div class="toDoList" id="toDoList">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="toDo" placeholder="Add to To-Do list" name="toDo">
+        <input type="submit" class="btn btn-success" id="toDoButton">
+      </div>
     </div>
-    <div class="form-group">
-      <input type="text" class="form-control" id="toDo" placeholder="Add to To-Do list" name="toDo">
-      <input type="submit" class="btn btn-primary" id="toDoButton"></div>
+
+    <h3>Create a Wiki</h3>
+    <p>This wiki can only be seen by registered participants</p>
+
+    <hr/>
+    <div class="wikiPlanningBox col-lg-5" id="wikiPlanningBox">
+      <div class="wikiContent" id="wikiContent">
+
+      </div>
+      <form action="/event/<%= event.id %>/planning" method="POST">
+        <input name="title" type="text" placeholder="Title?"/>
+        <textarea id="contentMarkdown" name="wikiContent" data-provide="markdown" rows="10"><%= event.wikiContent %></textarea>
+        <label class="checkbox">
+          <input name="publish" type="checkbox" default="<%= event.wikiPublished %>"> Publish
+        </label>
+        <hr/>
+        <button type="submit" class="btn btn-success">Save</button>
+      </form>
     </div>
   </div>
 </div>
